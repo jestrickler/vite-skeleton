@@ -29,6 +29,20 @@ vi.mock('@tanstack/react-query', () => ({
   QueryClientProvider: mockQueryClientProvider
 }))
 
+const { mockErrorBoundary } = vi.hoisted(() => ({
+  mockErrorBoundary: vi.fn((props) => props.children)
+}))
+vi.mock('@/ui/components/error/ErrorBoundary', () => ({
+  ErrorBoundary: mockErrorBoundary
+}))
+
+const { mockHelmetProvider } = vi.hoisted(() => ({
+  mockHelmetProvider: vi.fn((props) => props.children)
+}))
+vi.mock('react-helmet-async', () => ({
+  HelmetProvider: mockHelmetProvider
+}))
+
 const { mockThemeProvider } = vi.hoisted(() => ({
   mockThemeProvider: vi.fn((props) => props.children)
 }))
@@ -57,6 +71,16 @@ test('configures the QueryClientProvider', () => {
     }),
     expect.anything()
   )
+})
+
+test('uses the ErrorBoundary', () => {
+  render(<App />)
+  expect(mockErrorBoundary).toBeCalled()
+})
+
+test('uses the HelmetProvider', () => {
+  render(<App />)
+  expect(mockHelmetProvider).toBeCalled()
 })
 
 test('configures the RouterProvider', () => {

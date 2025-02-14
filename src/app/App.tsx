@@ -3,10 +3,11 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 import { getQueryClient, getRoutes, getTheme } from './config'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { ErrorBoundary } from '@/ui/components/error/ErrorBoundary'
+import { HelmetProvider } from 'react-helmet-async'
 import { ThemeProvider } from '@mui/material'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { QueryClientProvider } from '@tanstack/react-query'
-import { HelmetProvider } from 'react-helmet-async'
 
 const queryClient = getQueryClient()
 const routes = getRoutes(queryClient)
@@ -14,11 +15,13 @@ const theme = getTheme()
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider theme={theme}>
+    <ErrorBoundary>
       <HelmetProvider>
-        <RouterProvider router={createBrowserRouter(routes)} />
+        <ThemeProvider theme={theme}>
+          <RouterProvider router={createBrowserRouter(routes)} />
+        </ThemeProvider>
       </HelmetProvider>
-    </ThemeProvider>
+    </ErrorBoundary>
   </QueryClientProvider>
 )
 

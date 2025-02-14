@@ -1,5 +1,6 @@
 import { Box, Button, Stack } from '@mui/material'
 import { Outlet } from 'react-router-dom'
+import { ErrorBoundary } from '@/ui/components/error/ErrorBoundary'
 import { Link } from '@/ui/components/link/Link'
 
 /**
@@ -37,7 +38,9 @@ export const Component = () => {
         </nav>
       </header>
       <main id='main'>
-        <Outlet />
+        <ErrorBoundary>
+          <Outlet />
+        </ErrorBoundary>
       </main>
       <footer></footer>
     </Box>
