@@ -36,13 +36,6 @@ vi.mock('@/ui/components/error/ErrorBoundary', () => ({
   ErrorBoundary: mockErrorBoundary
 }))
 
-const { mockHelmetProvider } = vi.hoisted(() => ({
-  mockHelmetProvider: vi.fn((props) => props.children)
-}))
-vi.mock('react-helmet-async', () => ({
-  HelmetProvider: mockHelmetProvider
-}))
-
 const { mockThemeProvider } = vi.hoisted(() => ({
   mockThemeProvider: vi.fn((props) => props.children)
 }))
@@ -57,7 +50,7 @@ const { mockCreateBrowserRouter, mockRouter, mockRouterProvider } = vi.hoisted(
     mockRouterProvider: vi.fn()
   })
 )
-vi.mock('react-router-dom', () => ({
+vi.mock('react-router', () => ({
   createBrowserRouter: mockCreateBrowserRouter,
   RouterProvider: mockRouterProvider
 }))
@@ -67,20 +60,33 @@ test('configures the QueryClientProvider', () => {
   expect(mockGetQueryClient).toBeCalled()
   expect(mockQueryClientProvider).toBeCalledWith(
     expect.objectContaining({
-      client: mockQueryClient
+      client: mockQueryClient,
+      children: expect.anything()
     }),
-    expect.anything()
+    undefined
   )
 })
 
 test('uses the ErrorBoundary', () => {
   render(<App />)
-  expect(mockErrorBoundary).toBeCalled()
+  expect(mockErrorBoundary).toBeCalledWith(
+    expect.objectContaining({
+      children: expect.anything()
+    }),
+    undefined
+  )
 })
 
-test('uses the HelmetProvider', () => {
+test('configures the ThemeProvider', () => {
   render(<App />)
-  expect(mockHelmetProvider).toBeCalled()
+  expect(mockGetTheme).toBeCalled()
+  expect(mockThemeProvider).toBeCalledWith(
+    expect.objectContaining({
+      theme: mockTheme,
+      children: expect.anything()
+    }),
+    undefined
+  )
 })
 
 test('configures the RouterProvider', () => {
@@ -91,17 +97,6 @@ test('configures the RouterProvider', () => {
     expect.objectContaining({
       router: mockRouter
     }),
-    expect.anything()
-  )
-})
-
-test('configures the ThemeProvider', () => {
-  render(<App />)
-  expect(mockGetTheme).toBeCalled()
-  expect(mockThemeProvider).toBeCalledWith(
-    expect.objectContaining({
-      theme: mockTheme
-    }),
-    expect.anything()
+    undefined
   )
 })

@@ -10,10 +10,6 @@ export default defineConfig({
     }
   },
   test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/setupTest.ts',
-    css: true,
     coverage: {
       exclude: [
         ...(configDefaults.coverage.exclude ?? []),
@@ -21,6 +17,10 @@ export default defineConfig({
         '**/index.ts',
         '**/*.stories.tsx'
       ]
-    }
+    },
+    css: true,
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './src/setupTest.ts'
   }
 })

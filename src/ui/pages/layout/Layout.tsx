@@ -1,5 +1,5 @@
 import { Box, Button, Stack } from '@mui/material'
-import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router'
 import { ErrorBoundary } from '@/ui/components/error/ErrorBoundary'
 import { Link } from '@/ui/components/link/Link'
 

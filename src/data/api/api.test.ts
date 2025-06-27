@@ -10,7 +10,7 @@ vi.mock('axios', () => ({
 test('initializes axios', async () => {
   const api = getApi()
   expect(mockCreate).toBeCalledWith({
-    baseURL: 'https://api.chucknorris.io',
+    baseURL: 'https://jsonplaceholder.typicode.com',
     headers: { 'Content-Type': 'application/json' }
   })
   expect(api).toBe('mockApi')

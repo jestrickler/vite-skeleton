@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async'
 import { Box, Button, Stack, Typography } from '@mui/material'
 
 /**
@@ -7,9 +6,7 @@ import { Box, Button, Stack, Typography } from '@mui/material'
 export const Component = () => {
   return (
     <>
-      <Helmet>
-        <title>Home</title>
-      </Helmet>
+      <title>Home</title>
       <Box sx={{ width: '100%', maxWidth: 800 }}>
         <Typography variant='h1' gutterBottom>
           h1. Heading

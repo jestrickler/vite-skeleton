@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Component as Layout } from './Layout'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router'
 
 const { mockErrorBoundary } = vi.hoisted(() => ({
   mockErrorBoundary: vi.fn((props) => props.children)
@@ -13,7 +13,7 @@ vi.mock('@/ui/components/error/ErrorBoundary', () => ({
 const { mockOutlet } = vi.hoisted(() => ({
   mockOutlet: vi.fn((props) => props.children)
 }))
-vi.mock('react-router-dom', async (importOriginal) => ({
+vi.mock('react-router', async (importOriginal) => ({
   ...(await importOriginal()),
   Outlet: mockOutlet
 }))

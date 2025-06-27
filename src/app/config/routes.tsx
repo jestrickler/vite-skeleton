@@ -1,6 +1,5 @@
-import { createRoutesFromElements, Route } from 'react-router-dom'
+import { createRoutesFromElements, Route, type RouteObject } from 'react-router'
 import { QueryClient } from '@tanstack/react-query'
-import type { RouteObject } from 'react-router/dist/lib/context'
 
 let routes: RouteObject[] | null = null
 

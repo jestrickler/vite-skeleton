@@ -1,10 +1,14 @@
 import { getApi } from '../api/api'
 
-export const getTestQuery = () => ({
-  queryKey: ['test'],
+export type TestQueryProps = {
+  id: number
+}
+
+export const getTestQuery = ({ id }: TestQueryProps) => ({
+  queryKey: ['todos', id],
   queryFn: async () => {
     return getApi()
-      .get('/jokes/random')
+      .get(`/todos/${id}`)
       .then((response) => response.data)
   }
 })
